@@ -11,9 +11,9 @@ const select = document.getElementById('select');
 const inputNumber = document.getElementById('input-number');
 const responsetwo = document.getElementById('response-two');
 
-function rdnNumber()
+function rdnNumber(min,max)
 {
-    const rdnNumber = Math.floor(Math.random() * 5) + 1;
+    const rdnNumber = Math.floor(Math.random() * ( max - min + 1) ) + min;
     console.log(rdnNumber);
 
     return rdnNumber;
@@ -30,10 +30,10 @@ function isEven(number)
 {
     if(number % 2 === 0)
     {
-        return true;
+        return 'even';
     }
 
-    return false;
+    return 'odd';
 }
 
 oddEvenButton.addEventListener('click',function(){
@@ -45,20 +45,22 @@ oddEvenButton.addEventListener('click',function(){
     if(select.value && !isNaN(number) && (number > 0 && number < 6 ))
     {
         const numberUser = number;
-        const numberComputer = rdnNumber();
+        const numberComputer = rdnNumber(1,5);
         
         const total = sum(numberUser,numberComputer);
 
+        console.log(isEven(total));
+        console.log(select.value);
         /* PARI */
-        if(isEven(total) && select.value === 'even')
+        if(isEven(total) === select.value)
         {
             responsetwo.innerHTML = `<span class='text-success'>Complimenti! Hai Vinto!&nbsp;<i class="fas fa-glass-cheers"></i></span><br><span class='text-primary'>TOTALE: ${total}<span>`;
         }
-        /* DISPARI */
         else
         {
-            responsetwo.innerHTML = `<span class='text-danger'>Mi dispiace! Hai perso!</span><br><span class='text-primary'>TOTALE: ${total}<span>`;
+            responsetwo.innerHTML = `<span class='text-danger'>Mi dispiace! ma hai perso!</span><br><span class='text-primary'>TOTALE: ${total}<span>`;
         }
+       
         
     }
     else

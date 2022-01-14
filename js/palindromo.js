@@ -17,24 +17,22 @@ console.log(inputWord);
 
 function isPalindrome (input)
 {
-    const word = input.value;
+    const word = input.value.replace(/\s/g,'').toLowerCase();
     console.log(word);
 
     const lenght = word.length
 
     if(lenght !== 0)
     {          
-            const firstHalfWord = word.substring(0,lenght/2);
-            const lastHalfWord = word.substring(lenght/2,lenght);
-            console.log(firstHalfWord);
-            console.log(lastHalfWord);
-
-            if(firstHalfWord === lastHalfWord)
+        for(let i = 0; i < lenght / 2 ; i++)
+        {
+            if(word[i] !== word[lenght - (1 + i)])
             {
-                return true;
+                return false;
             }
-
-            return false;
+        }
+        
+        return true;
     }
     else
     {
